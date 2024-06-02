@@ -1,17 +1,31 @@
-function makeArray(firstArray, secondArray, maxLength){
-   let newArray = [];
-   newArray = firstArray.concat(secondArray);
-    let newLength = newArray.length;
-  if (newLength < maxLength){
-     return newArray;
- } else {
-    return newArray.slice(0, maxLength);
+class Storage {
+  #items;
+
+  constructor(items) {
+    this.#items = items;
+  }
+
+  getItems() {
+    return this.#items;
+  }
+
+  addItem(newItem) {
+    this.#items.push(newItem);
+  }
+
+  removeItem(itemToRemove) {
+    this.#items = this.#items.filter((item) => item !== itemToRemove);
   }
 }
 
-console.log(makeArray(["Mango", "Poly"], ["Ajax", "Chelsea"], 3)); 
-console.log(makeArray(["Mango", "Poly", "Houston"], ["Ajax", "Chelsea"], 4)); 
-console.log(makeArray(["Mango"], ["Ajax", "Chelsea", "Poly", "Houston"], 3)); 
-console.log(makeArray(["Earth", "Jupiter"], ["Neptune", "Uranus"], 2)); 
-console.log(makeArray(["Earth", "Jupiter"], ["Neptune", "Uranus"], 4));
-console.log(makeArray(["Earth", "Jupiter"], ["Neptune", "Uranus", "Venus"], 0));
+const storage = new Storage(["Nanitoids", "Prolonger", "Antigravitator"]);
+console.log(storage.getItems()); // ["Nanitoids", "Prolonger", "Antigravitator"]
+
+storage.addItem("Droid");
+console.log(storage.getItems()); // ["Nanitoids", "Prolonger", "Antigravitator", "Droid"]
+
+storage.removeItem("Prolonger");
+console.log(storage.getItems()); // ["Nanitoids", "Antigravitator", "Droid"]
+
+storage.removeItem("Scaner");
+console.log(storage.getItems()); // ["Nanitoids", "Antigravitator", "Droid"]
